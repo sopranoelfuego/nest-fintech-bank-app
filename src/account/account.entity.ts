@@ -1,7 +1,10 @@
-import { Column, Model, Table } from 'sequelize-typescript';
+import { Column, ForeignKey, Model, Table } from 'sequelize-typescript';
+import User from 'src/user/user.entity';
 @Table
-export class Account extends Model {
-  //  userId
+export default class Account extends Model {
+  @Column
+  @ForeignKey(() => User)
+  userId: number;
   @Column
   accountName: string;
   @Column
