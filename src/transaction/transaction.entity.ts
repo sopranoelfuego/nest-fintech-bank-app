@@ -4,10 +4,11 @@ import {
   Table,
   Column,
   Default,
+  DataType,
 } from 'sequelize-typescript';
-import User from '../user/user.entity';
-import { DataTypes } from 'sequelize';
+
 import Account from '../account/account.entity';
+import { User } from '../auth/user.entity';
 
 export enum transactionEnum {
   credit = 'credit',
@@ -27,8 +28,8 @@ export default class Transaction extends Model {
   date: Date;
   @Column
   narration: string;
+  @Column(DataType.ENUM({ values: Object.keys(transactionEnum) }))
   @Default('credit')
-  @Column(DataTypes.ENUM({ values: Object.keys(transactionEnum) }))
   transactionType: transactionEnum;
   @Column
   balance: number;
